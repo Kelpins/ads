@@ -1,5 +1,7 @@
 import java.util.*;
 
+//TODO: add -1 index functionality
+
 public class CustomArrayListTester
 {
    public static void main(String[] args)

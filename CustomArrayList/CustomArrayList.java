@@ -68,7 +68,7 @@ public class CustomArrayList<E>
       
       }
       
-      this.arr[this.size()] = element;
+      this.arr[this.size] = element;
       this.size++;
       
    }
@@ -110,7 +110,6 @@ public class CustomArrayList<E>
       
       this.arr[index] = element;
       this.size++;
-      
 
    }
    
@@ -125,6 +124,12 @@ public class CustomArrayList<E>
                false if o was not in the ArrayList
    */
    public boolean remove(E object) {
+   
+      if (this.size >= this.arr.length-1) {
+   
+         this.grow();
+   
+      }
    
       for (int i = 0; i < this.size; i++) {
       
@@ -161,11 +166,17 @@ public class CustomArrayList<E>
       
       }
       
+      if (this.size >= this.arr.length-1) {
+   
+         this.grow();
+   
+      }
+      
       E out_val = this.arr[index];
          
-      for (int j = index; j < this.size; j++) {
+      for (int i = index; i < this.size; i++) {
          
-         this.arr[j] = this.arr[j+1];
+         this.arr[i] = this.arr[i+1];
          
       }
       
@@ -263,13 +274,7 @@ public class CustomArrayList<E>
    */
    public boolean isEmpty() {
       
-      if (this.size == 0) {
-      
-         return true;
-      
-      }
-      
-      return false;
+      return (this.size == 0);
       
    }
    
@@ -291,9 +296,8 @@ public class CustomArrayList<E>
       
       for (int i = 1; i < this.size; i++) {
          
-         out_str += ", ";
-         out_str += this.arr[i];
-      
+         out_str += ", " + this.arr[i];
+         
       }
       
       out_str += "]";

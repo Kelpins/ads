@@ -7,6 +7,7 @@ public class CustomArrayList<E>
    /**
       Initializes the array with default size 10
    */
+   //O(1)
    public CustomArrayList() {
    
       this.size = 0;
@@ -19,6 +20,7 @@ public class CustomArrayList<E>
       @param initialCapacity the initial length of the internal array
       @throws IllegalArgumentException if initialCapacity is less than zero
    */
+   //O(1)
    public CustomArrayList(int initialCapacity) {
    
       if (initialCapacity <= 0) {
@@ -36,6 +38,7 @@ public class CustomArrayList<E>
       After growing, the last half (at least) of the internal array
       is comprised of null values.
    */
+   //O(N)
    private void grow() {
       
       E[] temp_arr = this.arr;
@@ -54,6 +57,7 @@ public class CustomArrayList<E>
       @param element the element to add
       @throws IllegalArgumentException if element is null
    */
+   //O(1)
    public void add(E element) {
    
       if (element.equals(null)) {
@@ -81,6 +85,7 @@ public class CustomArrayList<E>
       @param element the element to add
       @throws IllegalArgumentException if element is null
    */
+   //O(N)
    public void add(int index, E element) {
    
       if (element.equals(null)) {
@@ -123,6 +128,7 @@ public class CustomArrayList<E>
       @return true if o was successfully removed; 
                false if o was not in the ArrayList
    */
+   //O(N^2)
    public boolean remove(E object) {
    
       if (this.size >= this.arr.length-1) {
@@ -158,11 +164,21 @@ public class CustomArrayList<E>
       @return the removed object
       @throws IndexOutOfBoundsException if the index is out of bounds
    */
+   //O(N)
    public E remove(int index) {
    
-      if (index < 0 || index >= this.size) {
+      if (index < -1 * this.size || index >= this.size) {
       
          throw new IndexOutOfBoundsException();
+      
+      }
+      
+      if (index < 0) {
+         
+         E out_val = this.arr[this.size+index];
+         this.arr[this.size+index] = null;
+         this.size--;
+         return out_val;
       
       }
       
@@ -190,7 +206,22 @@ public class CustomArrayList<E>
       @param element the new element
       @return the element that was previously at that index
    */
+   //O(1)
    public E set(int index, E element) {
+      
+      if (index < -1 * this.size || index >= this.size) {
+      
+         throw new IndexOutOfBoundsException();
+      
+      }
+      
+      if (index < 0) {
+         
+         E out_val = this.arr[this.size+index];
+         this.arr[this.size+index] = element;
+         return out_val;
+      
+      }
       
       E out_element = this.arr[index];
       this.arr[index] = element;
@@ -203,6 +234,7 @@ public class CustomArrayList<E>
       @param object the object to search for
       @return true if o is found in the ArrayList; false otherwise
    */
+   //O(N)
    public boolean contains(E object) {
    
       for (int i = 0; i < this.size; i++) {
@@ -224,6 +256,7 @@ public class CustomArrayList<E>
       @return the first index of o in the ArrayList, or
                -1 if o is not in the ArrayList.
    */
+   //O(N)
    public int indexOf(E object) {
       
       for (int i = 0; i < this.size; i++) {
@@ -246,11 +279,18 @@ public class CustomArrayList<E>
       @return the object at the index
       @throws IndexOutOfBoundsException if the index is out of bounds
    */
+   //O(1)
    public E get(int index) {
    
-      if (index < 0 || index >= this.size) {
+      if (index < -1 * this.size || index >= this.size) {
       
          throw new IndexOutOfBoundsException();
+      
+      }
+      
+      if (index < 0) {
+      
+         return this.arr[this.size+index];
       
       }
    
@@ -262,6 +302,7 @@ public class CustomArrayList<E>
       Returns the current size of the ArrayList
       @return number of elements in this ArrayList
    */
+   //O(1)
    public int size() {
       
       return this.size;
@@ -272,6 +313,7 @@ public class CustomArrayList<E>
       Checks if the ArrayList is empty
       @return true if this ArrayList has zero elements; false otherwise
    */
+   //O(1)
    public boolean isEmpty() {
       
       return (this.size == 0);
@@ -284,6 +326,7 @@ public class CustomArrayList<E>
          [1, 3, 5]
       @return formatted ArrayList string
    */
+   //O(N)
    public String toString() {
    
       String out_str = "[";

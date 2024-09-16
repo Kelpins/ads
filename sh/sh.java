@@ -13,5 +13,13 @@ public class sh {
       System.out.print(p);
    
    }
-
+   
+   public static int to_int (String s) {}
+         
+   public static double to_double (String s) {}
+   
+   public static String str (int i) {}
+   
+   public static String str (double d) {}
+   
 }

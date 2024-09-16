@@ -1,3 +1,5 @@
+package ads.CustomStack;
+import ads.sh.*;
 import java.util.*;
 
 public class CustomStackTester {
@@ -62,17 +64,17 @@ public class CustomStackTester {
    
       if (!stack.toString().equals(correctToString)) {
       
-         System.out.println("Test FAILED: " + testName + ". Expected Elements: " + correctToString + ", got " + stack.toString());
+         sh.p("Test FAILED: " + testName + ". Expected Elements: " + correctToString + ", got " + stack.toString());
          
       }
       else if (stack.size() != correctSize) {
       
-         System.out.println("Test FAILED: " + testName + ". Expected Size: " + correctSize + ", got " + stack.size());
+         sh.p("Test FAILED: " + testName + ". Expected Size: " + correctSize + ", got " + stack.size());
       
       }
       else {
       
-         System.out.println("Test passed: " + testName);
+         sh.p("Test passed: " + testName);
       
       }
    }
@@ -86,7 +88,7 @@ public class CustomStackTester {
       
       if (!stack.empty()) {
       
-         System.out.println("Test FAILED: Empty. Expected new stack to be empty, but wasn't.");
+         sh.p("Test FAILED: Empty. Expected new stack to be empty, but wasn't.");
          
          return;
          
@@ -96,7 +98,7 @@ public class CustomStackTester {
       
       if (stack.empty()) {
       
-         System.out.println("Test FAILED: Empty. Expected stack of size 1 to not be empty.");
+         sh.p("Test FAILED: Empty. Expected stack of size 1 to not be empty.");
          
          return;
       
@@ -106,12 +108,12 @@ public class CustomStackTester {
       
       if (!stack.empty()) {
       
-         System.out.println("Test FAILED: Empty. Expected new stack to be empty, but wasn't.");
+         sh.p("Test FAILED: Empty. Expected new stack to be empty, but wasn't.");
       
       }
       else {
       
-         System.out.println("Test passed: Empty");
+         sh.p("Test passed: Empty");
       
       }
    }
@@ -123,7 +125,7 @@ public class CustomStackTester {
    
       CustomStack<Integer> stack = createIntStack();
       
-      result = stack.peek();
+      int result = stack.peek();
       
       if (result == 2) {
       
@@ -132,7 +134,7 @@ public class CustomStackTester {
       }
       else {
       
-         System.out.println("Test FAILED: Peek. Expected return value 2, got " + result)
+         sh.p("Test FAILED: Peek. Expected return value 2, got " + result);
          
       
       }
@@ -150,17 +152,17 @@ public class CustomStackTester {
       
          stack.peek();
          
-         System.out.println("Test FAILED: peek empty stack. Expected EmptyStackException, got no exception.");
+         sh.p("Test FAILED: peek empty stack. Expected EmptyStackException, got no exception.");
       
       }
       catch (EmptyStackException e) {
       
-         System.out.println("Test passed: peek empty stack");
+         sh.p("Test passed: peek empty stack");
       
       }
       catch (Exception e) {
          
-         System.out.println("Test FAILED: peek empty stack. Expected EmptyStackException, got a different exception.");
+         sh.p("Test FAILED: peek empty stack. Expected EmptyStackException, got a different exception.");
       
       }
 
@@ -173,16 +175,16 @@ public class CustomStackTester {
       
       CustomStack<String> stack = createStringStack();
       
-      result = stack.pop();
+      String result = stack.pop();
       
-      if (result.equals("Element 2") {
+      if (result.equals("Element 2")) {
       
          validateResults("pop", stack, "[Element 1]", 1);
       
       }
       else {
       
-         System.out.println("Test FAILED: Pop. Expected return value 2, got " + result)
+         sh.p("Test FAILED: Pop. Expected return value 2, got " + result);
       
       }
    }
@@ -198,17 +200,17 @@ public class CustomStackTester {
       
          stack.pop();
          
-         System.out.println("Test FAILED: pop empty stack. Expected EmptyStackException, got no exception.");
+         sh.p("Test FAILED: pop empty stack. Expected EmptyStackException, got no exception.");
       
       }
       catch (EmptyStackException e) {
       
-         System.out.println("Test passed: pop empty stack");
+         sh.p("Test passed: pop empty stack");
       
       }
       catch (Exception e) {
          
-         System.out.println("Test FAILED: pop empty stack. Expected EmptyStackException, got a different exception.");
+         sh.p("Test FAILED: pop empty stack. Expected EmptyStackException, got a different exception.");
       
       }
       
@@ -224,21 +226,21 @@ public class CustomStackTester {
       stack.push(72);
       stack.push(81);
       
-      out_val = stack.push(2);
+      int out_val = stack.push(2);
       
-      if (!out_val == 2) {
+      if (out_val != 2) {
       
-         System.out.println("Test FAILED: push. Expected return value 2, got return value " + out_val);
+         sh.p("Test FAILED: push. Expected return value 2, got return value " + out_val);
          
          return;
       
       }
       
-      result = stack.peek();
+      int result = stack.peek();
       
-      if (!result == 2) {
+      if (result != 2) {
       
-         System.out.println("Test FAILED: push. Expected top element 2, got top element " + result);
+         sh.p("Test FAILED: push. Expected top element 2, got top element " + result);
       
          return;
       
@@ -248,9 +250,9 @@ public class CustomStackTester {
       
       result = stack.peek();
       
-      if (!result == 81) {
+      if (result != 81) {
       
-         System.out.println("Test FAILED: push. Expected second element 81, got second element " + result);
+         sh.p("Test FAILED: push. Expected second element 81, got second element " + result);
       
          return;
       
@@ -271,15 +273,15 @@ public class CustomStackTester {
       
       if (invalidSearch != -1) {
       
-         System.out.println("Test FAILED: invalid search. Expected return value -1, but returned " + invalidSearch);
+         sh.p("Test FAILED: invalid search. Expected return value -1, but returned " + invalidSearch);
       
       }
       
       int validSearch = stack.search(new String("Element 1"));
       
-      if (indexOf != 1) {
+      if (validSearch != 1) {
       
-         System.out.println("Test FAILED: search. Expected return value 1, but returned " + validSearch);
+         sh.p("Test FAILED: search. Expected return value 1, but returned " + validSearch);
       
       }
       

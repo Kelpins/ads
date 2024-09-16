@@ -1,3 +1,5 @@
+package ads.CustomArrayList;
+import ads.sh.*;
 import java.util.*;
 
 public class CustomArrayListTester
@@ -65,15 +67,15 @@ public class CustomArrayListTester
    {
       if (!list.toString().equals(correctToString))
       {
-         System.out.println("Test FAILED: " + testName + ". Expected: " + correctToString + ", got " + list.toString());
+         sh.p("Test FAILED: " + testName + ". Expected: " + correctToString + ", got " + list.toString());
       }
       else if (list.size() != correctSize)
       {
-         System.out.println("Test FAILED: " + testName + ". Expected: " + correctSize + ", got " + list.size());
+         sh.p("Test FAILED: " + testName + ". Expected: " + correctSize + ", got " + list.size());
       }
       else
       {
-         System.out.println("Test passed: " + testName);
+         sh.p("Test passed: " + testName);
       }
    }
    
@@ -145,7 +147,7 @@ public class CustomArrayListTester
       boolean returnVal = list.remove("Not in the list");
       if (returnVal)
       {
-         System.out.println("Test FAILED: remove invalid object. Expected return value false, but returned true.");
+         sh.p("Test FAILED: remove invalid object. Expected return value false, but returned true.");
          return;
       }
       
@@ -165,7 +167,7 @@ public class CustomArrayListTester
       
       if (!removed.equals("Element 0"))
       {
-         System.out.println("Test FAILED: remove by index. Expected return value Element 0, but returned " + removed);
+         sh.p("Test FAILED: remove by index. Expected return value Element 0, but returned " + removed);
          return;
       }
       
@@ -186,15 +188,15 @@ public class CustomArrayListTester
       try
       {
          list.remove(5);
-         System.out.println("Test FAILED: remove invalid index. Expected IndexOutOfBoundsException, got no exception.");
+         sh.p("Test FAILED: remove invalid index. Expected IndexOutOfBoundsException, got no exception.");
       }
       catch (IndexOutOfBoundsException e)
       {
-         System.out.println("Test passed: remove invalid index");
+         sh.p("Test passed: remove invalid index");
       }
       catch (Exception e)
       {   
-         System.out.println("Test FAILED: remove invalid index. Expected IndexOutOfBoundsException, got a different exception.");
+         sh.p("Test FAILED: remove invalid index. Expected IndexOutOfBoundsException, got a different exception.");
       }
    }
    
@@ -221,11 +223,11 @@ public class CustomArrayListTester
       //using new String() to test == vs .equals
       if (list.contains(new String("Element 0")) && list.contains(new String("Element 1")) && !list.contains(new String("Element 2")))
       {
-         System.out.println("Test passed: contains.");
+         sh.p("Test passed: contains.");
       }
       else
       {
-         System.out.println("Test FAILED: contains. Expected list contains Element 0 and Element 1 but not Element 2.");
+         sh.p("Test FAILED: contains. Expected list contains Element 0 and Element 1 but not Element 2.");
       }
    }
    
@@ -238,13 +240,13 @@ public class CustomArrayListTester
       int indexOfInvalid = list.indexOf(new String("Element 50"));
       if (indexOfInvalid != -1)
       {
-         System.out.println("Test FAILED: indexOf invalid. Expected return value -1, but returned " + indexOfInvalid);
+         sh.p("Test FAILED: indexOf invalid. Expected return value -1, but returned " + indexOfInvalid);
       }
       
       int indexOf = list.indexOf(new String("Element 1"));
       if (indexOf != 1)
       {
-         System.out.println("Test FAILED: indexOf. Expected return value 1, but returned " + indexOfInvalid);
+         sh.p("Test FAILED: indexOf. Expected return value 1, but returned " + indexOfInvalid);
       }
       
       //indexOf should not modify the list
@@ -263,11 +265,11 @@ public class CustomArrayListTester
             
       if (list.get(0).equals("Element 0") && list.get(1).equals("Element 1"))
       {
-         System.out.println("Test passed: get method basic.");
+         sh.p("Test passed: get method basic.");
       }
       else
       {
-         System.out.println("Test FAILED: get method basic. get(0) should return Element 0, but returns " + list.get(0));
+         sh.p("Test FAILED: get method basic. get(0) should return Element 0, but returns " + list.get(0));
       }
       
       //get should not modify the list
@@ -288,15 +290,15 @@ public class CustomArrayListTester
       try
       {
          list.get(2);
-         System.out.println("Test FAILED: get invalid index. Expected IndexOutOfBoundsException, got no exception.");
+         sh.p("Test FAILED: get invalid index. Expected IndexOutOfBoundsException, got no exception.");
       }
       catch (IndexOutOfBoundsException e)
       {
-         System.out.println("Test passed: get invalid index");
+         sh.p("Test passed: get invalid index");
       }
       catch (Exception e)
       {   
-         System.out.println("Test FAILED: get invalid index. Expected IndexOutOfBoundsException, got a different exception.");
+         sh.p("Test FAILED: get invalid index. Expected IndexOutOfBoundsException, got a different exception.");
       }
    }
    
@@ -308,25 +310,25 @@ public class CustomArrayListTester
       CustomArrayList<Integer> list = new CustomArrayList<>();
       if (!list.isEmpty())
       {
-         System.out.println("Test FAILED: isEmpty. Expected new list to be empty, but wasn't.");
+         sh.p("Test FAILED: isEmpty. Expected new list to be empty, but wasn't.");
          return;
       }
       
       list.add(4);
       if (list.isEmpty())
       {
-         System.out.println("Test FAILED: isEmpty. Expected list of size 1 to not be empty.");
+         sh.p("Test FAILED: isEmpty. Expected list of size 1 to not be empty.");
          return;
       }
       
       list.remove(0);
       if (!list.isEmpty())
       {
-         System.out.println("Test FAILED: isEmpty. Expected new list to be empty, but wasn't.");
+         sh.p("Test FAILED: isEmpty. Expected new list to be empty, but wasn't.");
       }
       else
       {
-         System.out.println("Test passed: isEmpty");
+         sh.p("Test passed: isEmpty");
       }
    }
 

@@ -1,3 +1,6 @@
+package ads.CustomArrayList;
+import ads.sh.*;
+
 public class CustomArrayList<E>
 {
    //Instance variables

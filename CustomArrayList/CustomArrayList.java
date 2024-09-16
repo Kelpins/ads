@@ -57,7 +57,7 @@ public class CustomArrayList<E>
       @param element the element to add
       @throws IllegalArgumentException if element is null
    */
-   //O(1)
+   //O(1) -> O(N)
    public void add(E element) {
    
       if (element.equals(null)) {
@@ -128,7 +128,7 @@ public class CustomArrayList<E>
       @return true if o was successfully removed; 
                false if o was not in the ArrayList
    */
-   //O(N^2)
+   //O(N)
    public boolean remove(E object) {
    
       if (this.size >= this.arr.length-1) {

@@ -6,12 +6,14 @@ public class shTester {
 
    public static void main(String[] args) {
    
-      ArrList<String> list = new ArrList<>();
-      list.add("swoggy!");
-      list.add("hiya there ");
-      list.add("yayyy");
-      sh.print(list.get(-2));
-      sh.p(list.get(-3));
+      ArrList<Integer> list = sh.cnal(3);
+      list.add(18);
+      list.add(27);
+      sh.print(list.get(-1));
+      sh.p(list.get(-2));
+      
+      Stack<String> stk = sh.arr_stk(list, 2);
+      sh.p(stk.toString());
       
    }
    

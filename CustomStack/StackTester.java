@@ -2,7 +2,7 @@ package ads.CustomStack;
 import ads.sh.*;
 import java.util.*;
 
-public class CustomStackTester {
+public class StackTester {
 
    public static void main(String[] args) {
       
@@ -23,12 +23,12 @@ public class CustomStackTester {
    }
    
    /*
-      Creates a CustomStack to test on, which includes two elements.
+      Creates a Stack to test on, which includes two elements.
       @return the test stack
    */
-   public static CustomStack<String> createStringStack() {
+   public static Stack<String> createStringStack() {
    
-      CustomStack<String> stack = new CustomStack<>();
+      Stack<String> stack = new Stack<>();
       
       stack.push("Element 1");
       stack.push("Element 2");
@@ -38,12 +38,12 @@ public class CustomStackTester {
    }
    
    /*
-      Creates a CustomStack to test on, which includes two elements.
+      Creates a Stack to test on, which includes two elements.
       @return the test stack
    */
-   public static CustomStack<Integer> createIntStack() {
+   public static Stack<Integer> createIntStack() {
    
-      CustomStack<Integer> stack = new CustomStack<>();
+      Stack<Integer> stack = new Stack<>();
       
       stack.add(1);
       stack.add(2);
@@ -60,7 +60,7 @@ public class CustomStackTester {
       @param correctToString the expected toString() for the stack
       @param correctSize the expected size() for the stack
    */
-   public static void validateResults(String testName, CustomStack stack, String correctToString, int correctSize) {
+   public static void validateResults(String testName, Stack stack, String correctToString, int correctSize) {
    
       if (!stack.toString().equals(correctToString)) {
       
@@ -84,7 +84,7 @@ public class CustomStackTester {
    */
    public static void testEmpty()
    {
-      CustomStack<Integer> stack = new CustomStack<>();
+      Stack<Integer> stack = new Stack<>();
       
       if (!stack.empty()) {
       
@@ -113,7 +113,7 @@ public class CustomStackTester {
       }
       else {
       
-         sh.p("Test passed: Empty");
+         sh.p("Test passed: empty");
       
       }
    }
@@ -123,7 +123,7 @@ public class CustomStackTester {
    */
    public static void testPeek() {
    
-      CustomStack<Integer> stack = createIntStack();
+      Stack<Integer> stack = createIntStack();
       
       int result = stack.peek();
       
@@ -146,7 +146,7 @@ public class CustomStackTester {
    */
    public static void testPeekEmptyStack() {
       
-      CustomStack<Integer> stack = new CustomStack<>();
+      Stack<Integer> stack = new Stack<>();
       
       try {
       
@@ -173,7 +173,7 @@ public class CustomStackTester {
    */
    public static void testPop() {
       
-      CustomStack<String> stack = createStringStack();
+      Stack<String> stack = createStringStack();
       
       String result = stack.pop();
       
@@ -194,7 +194,7 @@ public class CustomStackTester {
    */
    public static void testPopEmptyStack() {
       
-      CustomStack<String> stack = new CustomStack<>();
+      Stack<String> stack = new Stack<>();
       
       try {
       
@@ -221,7 +221,7 @@ public class CustomStackTester {
    */
    public static void testPush() {
       
-      CustomStack<Integer> stack = new CustomStack<>();
+      Stack<Integer> stack = new Stack<>();
       
       stack.push(72);
       stack.push(81);
@@ -267,7 +267,7 @@ public class CustomStackTester {
    */
    public static void testSearch() {
    
-      CustomStack<String> stack = createStringStack();
+      Stack<String> stack = createStringStack();
       
       int invalidSearch = stack.search(new String("Element 50"));
       
@@ -277,11 +277,19 @@ public class CustomStackTester {
       
       }
       
-      int validSearch = stack.search(new String("Element 1"));
+      int validSearch = stack.search(new String("Element 2"));
       
       if (validSearch != 1) {
       
          sh.p("Test FAILED: search. Expected return value 1, but returned " + validSearch);
+      
+      }
+      
+      validSearch = stack.search(new String("Element 1"));
+      
+      if (validSearch != 2) {
+      
+         sh.p("Test FAILED: search. Expected return value 2, but returned " + validSearch);
       
       }
       

@@ -38,7 +38,7 @@ public class CustomStack<E>
    
    public int size() {
    
-      return 0;
+      return this.size;
    
    }
    
@@ -50,7 +50,7 @@ public class CustomStack<E>
    //O(N)
    public int push(E e) {
       
-      return 0;
+      return e;
       
    }
    
@@ -62,7 +62,7 @@ public class CustomStack<E>
    //O(1) -> O(N)
    public void add(E e) {
    
-      
+      return e;
       
    }
    
@@ -94,7 +94,7 @@ public class CustomStack<E>
    //O(N)
    public E peek() {
    
-      return null;
+      return 3;
       
    }
    

@@ -14,12 +14,12 @@ public class sh {
    
    }
    
-   public static int to_int (String s) {}
+   public static int to_int (String s) {return 0;}
          
-   public static double to_double (String s) {}
+   public static double to_double (String s) {return 0.0;}
    
-   public static String str (int i) {}
+   public static String str (int i) {return null;}
    
-   public static String str (double d) {}
+   public static String str (double d) {return null;}
    
 }

@@ -12,7 +12,7 @@ public class shTester {
       sh.print(list.get(-1));
       sh.p(list.get(-2));
       
-      Stack<String> stk = sh.arr_stk(list, 2);
+      Stack<String> stk = sh.arr_stk(list, 1);
       sh.p(stk.toString());
       
    }

@@ -1,4 +1,4 @@
-package ads.sh;
+package sh;
 
 public class ArrList<E> {
 
@@ -60,8 +60,8 @@ public class ArrList<E> {
       @throws IllegalArgumentException if element is null
    */
    //O(1) -> O(N)
-   public void add(E element) {
-   
+   public E add(E element) {
+      
       if (element.equals(null)) {
       
          throw new IllegalArgumentException();
@@ -77,6 +77,8 @@ public class ArrList<E> {
       this.arr[this.size] = element;
       this.size++;
       
+      return element;
+      
    }
    
    /**
@@ -88,7 +90,7 @@ public class ArrList<E> {
       @throws IllegalArgumentException if element is null
    */
    //O(N)
-   public void add(int index, E element) {
+   public E add(int index, E element) {
    
       if (element.equals(null)) {
       
@@ -117,6 +119,8 @@ public class ArrList<E> {
       
       this.arr[index] = element;
       this.size++;
+      
+      return element;
 
    }
    
@@ -200,6 +204,16 @@ public class ArrList<E> {
       
       this.size--;
       return out_val;
+   }
+   
+   public void removeAll() {
+   
+      while (!(this.arr[0] == null)) {
+      
+         this.remove(this.size-1);
+      
+      }
+   
    }
    
    /**

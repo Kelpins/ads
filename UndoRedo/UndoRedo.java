@@ -1,17 +1,15 @@
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
-import sh.*;
 
 public class UndoRedo {
 
-   private static Stk<Character> undoStack = new Stk<>();
-   private static Stk<Character> redoStack = new Stk<>();
+   private static CustomStack<Character> undoStack = new CustomStack<>();
+   private static CustomStack<Character> redoStack = new CustomStack<>();
    
    public static void main(String[] args) {
    
       DrawingPanel panel = new DrawingPanel(500, 500);
-      
       panel.addKeyListener(new UndoRedoKeyListener(panel));
       
    }
@@ -19,7 +17,6 @@ public class UndoRedo {
    static class UndoRedoKeyListener extends KeyAdapter {
    
       private DrawingPanel panel;
-      
       private String currentString;
          
       /**
@@ -41,7 +38,8 @@ public class UndoRedo {
       
          int code = event.getKeyCode();
          
-         if ((code == 'Y' && (event.isControlDown() || event.isMetaDown()) && !event.isShiftDown()) || (code == 'Z' && (event.isControlDown() || event.isMetaDown()) && (event.isShiftDown()))) {
+         if ((code == 'Y' && (event.isControlDown() || event.isMetaDown()) && !event.isShiftDown())
+               || (code == 'Z' && (event.isControlDown() || event.isMetaDown()) && (event.isShiftDown()))) {
          
             if (!redoStack.empty()) {
                
@@ -49,7 +47,6 @@ public class UndoRedo {
                
                   undoStack.push(this.currentString.charAt(this.currentString.length()-1));
                   undoStack.push('b');
-                  
                   redoStack.pop();
                   
                   this.currentString = this.currentString.substring(0,this.currentString.length()-1);

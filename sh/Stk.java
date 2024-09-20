@@ -1,105 +1,46 @@
-package ads.CustomStack;
-import ads.sh.*;
+package sh;
+
 import java.util.*;
 
-public class Stk<E>
-{
+public class Stk<E> {
 
-   private E[] arr;
+   private ArrList<E> arr;
    private E top;
-   private int size;
-   
-   //O(1)
-   public Stk(int initialCapacity) {
-   
-      if (initialCapacity <= 0) {
-      
-         throw new EmptyStackException();
-      
-      }
-      
-      this.arr = (E[])new Object[initialCapacity];
-      this.size = 0;
-      this.top = null;
-      
-   }
    
    //O(1)
    public Stk() {
    
-      this.arr = (E[])new Object[10];
-      this.size = 0;
+      this.arr = new ArrList<E>();
       this.top = null;
 
-   }
-   
-   //O(N)
-   private void grow() {
-      
-      E[] temp_arr = this.arr;
-      this.arr = (E[])new Object[this.arr.length*2];
-      
-      for (int i = 0; i < this.size; i++) {
-      
-         this.arr[i] = temp_arr[i];
-      
-      }
-      
    }
    
    //O(1)
    public int size() {
    
-      return this.size;
+      return this.arr.size();
    
    }
    
    //O(1) -> O(N)
-   public E push(E e) {
+   public E push(E item) {
       
-      if (this.size == this.arr.length) {
+      this.top = item;
+      return this.arr.add(item);
       
-         this.grow();
-      
-      }
-      
-      this.top = e;
-      this.arr[size] = e;
-      this.size++;
-      
-      return e;
-      
-   }
-   
-   //O(1) -> O(N)
-   public E add(E e) {
-   
-      if (this.size == this.arr.length) {
-      
-         this.grow();
-      
-      }
-      
-      this.top = e;
-      this.arr[size] = e;
-      this.size++;
-      
-      return e;
-         
    }
    
    //O(1)
    public boolean empty() {
    
-      return this.size==0;
+      return this.size()==0;
       
    }
-
-   //O(1)
-   public boolean isEmpty() {
    
-      return this.size==0;
-      
+   public void clear() {
+   
+      this.arr.removeAll();
+   
    }
    
    //O(1)
@@ -121,17 +62,16 @@ public class Stk<E>
       if (!(this.top == null)) {
       
          E out_val = this.top;
-         this.arr[this.size-1] = null;
-         this.size--;
+         this.arr.remove(this.size()-1);
          
-         if (this.size == 0) {
+         if (this.size() == 0) {
          
             this.top = null;
          
          }
          else {
          
-            this.top = this.arr[this.size-1];
+            this.top = this.arr.get(this.size()-1);
          
          }
          
@@ -146,15 +86,16 @@ public class Stk<E>
    //O(N)
    public int search(E e) {
       
-      for (int i = this.size-1; i >= 0; i--) {
+      for (int i = this.size()-1; i >= 0; i--) {
       
-         if (this.arr[i].equals(e)) {
+         if (this.arr.get(i).equals(e)) {
          
-            return (this.size - i);
+            return (this.size() - i);
          
          }
       
       }
+      
       return -1;
             
    }
@@ -165,15 +106,15 @@ public class Stk<E>
    
       String out_str = "[";
       
-      if (this.size != 0) {
+      if (this.size() != 0) {
       
-         out_str += this.arr[0];
+         out_str += this.arr.get(0);
       
       }
       
-      for (int i = 1; i < this.size; i++) {
+      for (int i = 1; i < this.size(); i++) {
          
-         out_str += ", " + this.arr[i];
+         out_str += ", " + this.arr.get(i);
          
       }
       

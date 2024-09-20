@@ -1,5 +1,3 @@
-package sh;
-
 import java.util.*;
 
 public class CustomStack<E> {

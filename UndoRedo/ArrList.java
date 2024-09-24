@@ -204,6 +204,7 @@ public class ArrList<E> {
       return out_val;
    }
    
+   //O(N)
    public void removeAll() {
    
       while (!(this.arr[0] == null)) {

@@ -13,7 +13,6 @@ public class CustomStack<E> {
    
    /**
    * Constructs a CustomStack object
-   * O(1)
    */
    public CustomStack() {
    
@@ -25,7 +24,6 @@ public class CustomStack<E> {
    /**
    * Gives the amount of objects in the CustomStack
    * @return the size of the ArrList (which is the amount of objects in the CustomStack)
-   * O(1)
    */
    public int size() {
    
@@ -37,7 +35,6 @@ public class CustomStack<E> {
    * Adds an element to the top of the stack
    * @param item the object to add
    * @return the item that was added
-   * O(1) -> O(N)
    */
    public E push(E item) {
       
@@ -49,7 +46,6 @@ public class CustomStack<E> {
    /**
    * Checks if there are no elements in the CustomStack
    * @return whether the CustomStack is empty
-   * O(1)
    */
    public boolean empty() {
    
@@ -59,11 +55,6 @@ public class CustomStack<E> {
    
    /**
    * Removes all elements from the CustomStack
-   * O(N)
-   *  This calculation is a little bit confusing since technically there is a nested loop,
-   *  but when the remove(int i) function is called within ArrList given the input of this.size-1,
-   *  the inside for loop will only ever run once, since its cutoff condition is i < this.size.
-   *  Therefore, this function operates in O(N * N^0) time, or O(N).
    */
    public void clear() {
    
@@ -75,7 +66,6 @@ public class CustomStack<E> {
    * Peeks the top element in the CustomStack
    * @throws an EmptyStackException if the CustomStack is empty
    * @return this.top, the top element of the CustomStack
-   * O(1)
    */
    public E peek() {
    
@@ -93,7 +83,6 @@ public class CustomStack<E> {
    * Removes the top element in the CustomStack
    * @throws an EmptyStackException if the CustomStack is empty
    * @return the removed element
-   * O(1)
    */
    public E pop() {
    
@@ -124,9 +113,8 @@ public class CustomStack<E> {
    /**
    * Searches for element in the CustomStack
    * @param e the element to be searched for
-   * @return element's index: 1 at the top of the CustomStack, index increasing toward the bottom
-   * @return -1 if element is not in CustomStack
-   * O(N)
+   * @return element's index: 1 at the top of the CustomStack, with the index increasing
+   * toward the bottom of the CustomStack. Returns -1 if element is not found.
    */
    public int search(E e) {
       
@@ -145,7 +133,6 @@ public class CustomStack<E> {
    }
       
    @Override
-   //O(N)
    public String toString() {
    
       String out_str = "[";

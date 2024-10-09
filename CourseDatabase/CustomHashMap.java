@@ -1,21 +1,36 @@
 import java.util.*;
-import sh.*;
 
+/**
+* CustomHashMap
+* Defines the data structure CustomHashMap with get, put, and toString methods.
+* @author Kellan, Applications of Data Structures
+*/
 public class CustomHashMap<K,V> {
 
    private ArrList<KeyValuePair<K,V>>[] data;
+   private int size;
+   private static final double LOAD_FACTOR = 0.6;
    
+   /**
+   * Constructs a CustomHashMap object
+   */
    public CustomHashMap() {
    
       this.data = (ArrList<KeyValuePair<K,V>>[])new ArrList[3];
+      this.size = 0;
    
    }
    
+   /**
+   * Grows the map's capacity; this method is called when the load factor is reached.
+   */
    private void grow() {
       
+      // Creates a temporary array and resets the original array, with double capacity!
       ArrList<KeyValuePair<K,V>>[] temp_arr = this.data;
-      this.data = (ArrList<KeyValuePair<K,V>>[])new ArrList[this.data.length * 2];
+      this.data = new ArrList[this.data.length * 2];
       
+      // Copies each element back over into the original array.
       for (int i = 0; i < temp_arr.length; i++) {
       
          if (temp_arr[i] != null) {
@@ -23,7 +38,10 @@ public class CustomHashMap<K,V> {
             for (int j = 0; j < temp_arr[i].size(); j++) {
             
                KeyValuePair<K,V> kvp = temp_arr[i].get(j);
-            
+               
+               this.size = 0;
+               
+               // In order not to rehash, simply use the built-in put functionality!
                this.put(kvp.getKey(), kvp.getValue());
             
             }
@@ -34,34 +52,16 @@ public class CustomHashMap<K,V> {
       
    }
    
-   private int getSize() {
-   
-      int count = 0;
-   
-      for (int i = 0; i < this.data.length; i++) {
-      
-         if (this.data[i] != null) {
-         
-            for (int j = 0; j < this.data[i].size(); j++) {
-            
-               count++;
-            
-            }
-         
-         }
-      
-      }
-      
-      return count;
-   
-   }
-   
+   /**
+   * Gets the value associated with a given key in the CustomHashMap
+   * @param key the given key to associate with a value
+   * @return the value associated with the given key
+   */
    public V get(K key) {
    
-      int index = Math.abs(key.hashCode());
-      int size = this.data.length;
+      int index = Math.abs(key.hashCode()) % this.data.length;
       
-      ArrList<KeyValuePair<K,V>> values = data[index%size];
+      ArrList<KeyValuePair<K,V>> values = data[index];
       
       if (values != null) {
       
@@ -81,33 +81,53 @@ public class CustomHashMap<K,V> {
    
    }
    
+   /**
+   * Puts a key value pair into the CustomHashMap
+   * @param key the key of the key value pair
+   * @param value the value of the key value pair
+   */
    public void put(K key, V value) {
    
-      int index = Math.abs(key.hashCode());
-      int size = this.data.length;
+      /*
+      * HashMaps work by hashing each key and modding by the capacity,
+      * using the result as the index in the underlying array
+      */
       
-      if (this.getSize()+1 > (0.6 * size)) {
+      // Checks if, by the end of this operation, we will have hit the load factor
+      if (this.size+1 > (this.LOAD_FACTOR * this.data.length)) {
       
          this.grow();
       
       }
       
-      size = this.data.length;
+      int index = Math.abs(key.hashCode()) % this.data.length;
       
-      if (this.data[index%size] == null) {
+      /*
+      * If there is nothing at that index in the underlying array,
+      * then it is as simple as creating an empty ArrList at that index
+      * and filling it with the KeyValuePair.
+      */
+      if (this.data[index] == null) {
       
-         this.data[index%size] = new ArrList<KeyValuePair<K,V>>();
-         this.data[index%size].add(new KeyValuePair(key, value));
-         
+         this.data[index] = new ArrList<KeyValuePair<K,V>>();
+         this.data[index].add(new KeyValuePair(key, value));
       
       }
       else {
-               
-         for (int i = 0; i < this.data[index%size].size(); i++) {
          
-            if (this.data[index%size].get(i).getKey().equals(key)) {
+         /*
+         * If there is already an ArrList at that index in the underlying array,
+         * we first have to check if the input key already has an associated value
+         * by looping through each key value pair in that ArrList and comparing the keys
+         */
+         for (int i = 0; i < this.data[index].size(); i++) {
+         
+            // If the keys match up, then we only need to change the value at that spot in the map
+            if (this.data[index].get(i).getKey().equals(key)) {
             
-               this.data[index%size].get(i).setValue(value);
+               this.data[index].get(i).setValue(value);
+               
+               this.size++;
                
                return ;
             
@@ -115,45 +135,24 @@ public class CustomHashMap<K,V> {
          
          }
          
-         this.data[index%size].add(new KeyValuePair(key, value));
+         // Otherwise, we add a new KeyValuePair to the ArrList at that index
+         this.data[index].add(new KeyValuePair(key, value));
       
       }
-   
+      
+      this.size++;
+         
    }
-   
+
+   @Override
    public String toString() {
    
-      String out = "HashMap with " + this.getSize() + " elements / " + this.data.length + " slots:\n";
+      String out = "HashMap with " + this.size + " elements / " + this.data.length + " slots:\n";
       
       for (int i = 0; i < this.data.length; i++) {
       
-         if (this.data[i] == null) {
-         
-            out += (i + ": null\n");
-         
-         }
-         else {
-         
-            out += (i + ": [");
-            for (int j = 0; j < this.data[i].size(); j++) {
+         out += (i + ": " + this.data[i] + "\n");
                
-               if (j > 0) {
-               
-                  out += (", ");
-               
-               }
-               
-               out += ("(key: ");
-               out += ("" + this.data[i].get(j).getKey());
-               out += ("; value: ");
-               out += ("" + this.data[i].get(j).getValue());
-               out += (")");
-            
-            }
-            out += ("]\n");
-         
-         }
-      
       }
       
       return out;

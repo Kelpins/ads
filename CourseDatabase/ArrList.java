@@ -1,5 +1,3 @@
-package sh;
-
 public class ArrList<E> {
 
    //Instance variables

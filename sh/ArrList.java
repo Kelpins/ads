@@ -1,5 +1,3 @@
-package sh;
-
 public class ArrList<E> {
 
    //Instance variables
@@ -32,6 +30,7 @@ public class ArrList<E> {
       }
       
       this.arr = (E[])new Object[initialCapacity];
+      this.size = 0;
       
    }
    

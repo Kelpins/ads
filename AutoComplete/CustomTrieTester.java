@@ -25,23 +25,39 @@ public class CustomTrieTester {
       
       sh.p("all words:\n");
       
-      ArrayList<String> words = trie.getAllWords();
+      ArrList<String> words = trie.getAllWords();
       for (String word : words) {
       
          sh.p(word);
       
       }
-      /*
       
-      sh.p("prefix:\n");
       
-      ArrayList<String> prefixWords = trie.searchPrefix("y");
+      sh.p("\n\nprefix(y):\n");
+      
+      ArrList<String> prefixWords = trie.searchPrefix("y");
       for (String word : prefixWords) {
       
          sh.p(word);
       
       }
-      */
+      
+      sh.p("\n\nprefix(ad):\n");
+      
+      ArrList<String> prefixWords2 = trie.searchPrefix("ad");
+      for (String word : prefixWords2) {
+      
+         sh.p(word);
+      
+      }
+      
+      
+      sh.p(trie.search("add"));
+      sh.p(trie.search("adds"));
+      sh.p(trie.search("orangutan"));
+      sh.p(trie.search("ya"));
+      sh.p(trie.search("addi"));
+      sh.p(trie.search("oranguta"));
       
       CustomTrieVisualizer.visualizeTrie(trie);
    

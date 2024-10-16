@@ -3,7 +3,7 @@ import java.util.*;
 public class CustomTrie<T> {
 
    private CustomTrieNode root;
-   private ArrayList<CustomTrieNode> children;   
+   private ArrList<CustomTrieNode> children;   
 
    public CustomTrie() {
    
@@ -19,8 +19,14 @@ public class CustomTrie<T> {
    }
    
    private void insertHelper(CustomTrieNode trie, String str) {
+   
+      if (str.equals("")) {
       
-      ArrayList<CustomTrieNode> children = trie.getChildren();
+         return;
+      
+      }
+      
+      ArrList<CustomTrieNode> children = new ArrList(trie.getChildren());
       
       for (CustomTrieNode child : children) {
             
@@ -31,34 +37,17 @@ public class CustomTrie<T> {
          * root node of the trie
          */
          if (child.equals(str.charAt(0))) {
-            
-            CustomTrieNode newRoot = trie.getChild(child.getCharacter());
-                           
-            insertHelper(newRoot, str.substring(1));
-            
-            break;
+                                       
+            insertHelper(trie.getChild(child.getCharacter()), str.substring(1));
          
          }
       
       }
-            
-      if (str.length() == 1) {
       
-         //Adds the final (end-of-word) character
-         
-         trie.addChild(str.charAt(0), true);
-         
-         return;
+      //Recursively adds each of the word's remaining characters as a path of nodes on the trie   
+      trie.addChild(str.charAt(0), str.length()==1);
+      insertHelper(trie.getChild(str.charAt(0)), str.substring(1));
       
-      }
-      else {
-         
-         //Recursively adds each of the word's remaining characters as a path of nodes on the trie
-         
-         trie.addChild(str.charAt(0), false);
-         insertHelper(trie.getChild(str.charAt(0)), str.substring(1));
-      
-      }
    
    }
    
@@ -79,22 +68,39 @@ public class CustomTrie<T> {
    
    }
    
-   /*private boolean searchHelper() {
+   public boolean search (String word) {
    
+      CustomTrieNode currentTrie = this.root;
+   
+      for (int i = 0; i < word.length(); i++) {
+      
+         if (!currentTrie.containsChild(word.charAt(i))) {
+         
+            return false;
+         
+         }
+         else {
+         
+            currentTrie = currentTrie.getChild(word.charAt(i));
+         
+         }
+      
+      }
+      
+      if (currentTrie.isEndOfWord()) {
+      
+         return true;
+      
+      }
+      
       return false;
    
    }
    
-   public boolean search (String word) {
-   
-      return false;
-   
-   }*/
-   
-   private ArrayList<String> getAllWordsHelper(CustomTrieNode trie, String prefix) {
+   private ArrList<String> getAllWordsHelper(CustomTrieNode trie, String prefix) {
       
-      ArrayList<String> words = new ArrayList<>();
-      ArrayList<CustomTrieNode> children = trie.getChildren();
+      ArrList<String> words = new ArrList<>();
+      ArrList<CustomTrieNode> children = new ArrList(trie.getChildren());
       
       for (CustomTrieNode child : children) {
          
@@ -115,17 +121,33 @@ public class CustomTrie<T> {
    
    }
    
-   public ArrayList<String> getAllWords() {
+   public ArrList<String> getAllWords() {
       
       return getAllWordsHelper(this.root, "");   
    
    }
    
-   /*public ArrayList<String> searchPrefix(String prefix) {
-      
-      //return this.getAllWordsHelper([FIND ROOT W/ GIVEN PREFIX], prefix);
-      return new ArrayList<String>();
+   public ArrList<String> searchPrefix(String prefix) {
    
-   }*/
+      CustomTrieNode prefixRoot = this.root;
+   
+      for (int i = 0; i < prefix.length(); i++) {
+      
+         if (!prefixRoot.containsChild(prefix.charAt(i))) {
+         
+            return new ArrList<String>();
+         
+         }
+         else {
+         
+            prefixRoot = prefixRoot.getChild(prefix.charAt(i));
+         
+         }
+      
+      }
+      
+      return this.getAllWordsHelper(prefixRoot, prefix);
+   
+   }
 
 }

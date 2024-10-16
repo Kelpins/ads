@@ -1,4 +1,8 @@
-public class ArrList<E> {
+package sh;
+
+import java.util.*;
+
+public class ArrList<E> implements Iterable<E> {
 
    //Instance variables
    private E[] arr;
@@ -31,6 +35,45 @@ public class ArrList<E> {
       
       this.arr = (E[])new Object[initialCapacity];
       this.size = 0;
+      
+   }
+   
+   public ArrList(ArrayList<E> list) {
+   
+      this();
+   
+      for (int i = 0; i < list.size(); i++) {
+      
+         this.add(list.get(i));
+      
+      }
+   
+   }
+   
+   @Override
+   public Iterator<E> iterator() {
+
+      return new MyIterator();
+
+   }
+   
+   private class MyIterator implements Iterator<E> {
+
+      private int index = 0;
+   
+      @Override
+      public boolean hasNext() {
+      
+          return index < size;
+          
+      }
+   
+      @Override
+      public E next() {
+      
+          return arr[index++];
+          
+      }
       
    }
    
@@ -121,6 +164,26 @@ public class ArrList<E> {
       
       return element;
 
+   }
+   
+   public void addAll(ArrayList<E> arrayList) {
+   
+      for (int i = 0; i < arrayList.size(); i++) {
+      
+         this.add(arrayList.get(i));
+      
+      }
+   
+   }
+   
+   public void addAll(ArrList<E> arrList) {
+   
+      for (int i = 0; i < arrList.size(); i++) {
+      
+         this.add(arrList.get(i));
+      
+      }
+   
    }
    
    /**

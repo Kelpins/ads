@@ -7,13 +7,11 @@ public class sh {
    public static void p(int p) { System.out.println(p); }
    public static void p(String p) { System.out.println(p); }
    public static void p(double p) { System.out.println(p); }
-   public static void p(long p) { System.out.println(p); }
    public static void p(boolean p) { System.out.println(p); }
    
    public static void print(int p) { System.out.print(p); }
    public static void print(String p) { System.out.print(p); }
    public static void print(double p) { System.out.print(p); }
-   public static void pring(long p) { System.out.print(p); }
    public static void print(boolean p) { System.out.print(p); }
    
    public static Stk cns (int i) { return new Stk<Integer>(); }

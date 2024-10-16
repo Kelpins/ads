@@ -30,6 +30,8 @@ public class CustomHashMap<K,V> {
       ArrList<KeyValuePair<K,V>>[] temp_arr = this.data;
       this.data = new ArrList[this.data.length * 2];
       
+      this.size = 0;
+      
       // Copies each element back over into the original array.
       for (int i = 0; i < temp_arr.length; i++) {
       
@@ -38,9 +40,7 @@ public class CustomHashMap<K,V> {
             for (int j = 0; j < temp_arr[i].size(); j++) {
             
                KeyValuePair<K,V> kvp = temp_arr[i].get(j);
-               
-               this.size = 0;
-               
+                              
                // In order not to rehash, simply use the built-in put functionality!
                this.put(kvp.getKey(), kvp.getValue());
             
@@ -126,9 +126,7 @@ public class CustomHashMap<K,V> {
             if (this.data[index].get(i).getKey().equals(key)) {
             
                this.data[index].get(i).setValue(value);
-               
-               this.size++;
-               
+                              
                return ;
             
             }
@@ -141,7 +139,13 @@ public class CustomHashMap<K,V> {
       }
       
       this.size++;
-         
+               
+   }
+   
+   public int getSize() {
+   
+      return this.size;
+   
    }
 
    @Override

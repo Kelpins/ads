@@ -5,17 +5,39 @@ public class hMapTester {
 
    public static void main (String[] args) {
       
-      CustomHashMap<String, String> food = new CustomHashMap<String, String>();
+      CustomHashMap<String, String> hm = new CustomHashMap<String, String>();
       
-      sh.p(food.toString());
+      hm.put("a","b");
       
-      food.put("Amanda", "French");
-            
-      food.put("Michele", "Chinese");
+      sh.p(hm.toString());
       
-      food.put("John", "Spanish");
+      hm.put("cs","d");
       
-      sh.p(food.toString());
+      sh.p(hm.toString());
+      
+      hm.put("ed","f");
+      
+      sh.p(hm.toString());
+      
+      hm.put("ga","h");
+      
+      sh.p(hm.toString());
+      
+      hm.put("ih","j");
+      
+      sh.p(hm.toString());
+      
+      hm.put("ka","l");
+      
+      sh.p(hm.toString());
+      
+      hm.put("ma","n");
+      
+      sh.p(hm.toString());
+
+      hm.put("ox","p");
+      
+      sh.p(hm.toString());
       
    }
 

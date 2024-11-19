@@ -5,19 +5,20 @@ public class CustomTrieTester {
 
    public static void main (String[] args) {
    
-      CustomTrie trie = new CustomTrie<String>();
+      CustomTrie trie = new CustomTrie();
       
       System.out.println(trie.getRoot());
             
       trie.insert("yay");
       trie.insert("yap");
-      trie.insert("add");
+
       trie.insert("addition");
       trie.insert("additive");
+      
       trie.insert("audit");
       trie.insert("yup");
       trie.insert("orange");
-      trie.insert("add");
+
       trie.insert("orangutan");
       trie.insert("adds");
       trie.insert("add");
@@ -42,9 +43,9 @@ public class CustomTrieTester {
       
       }
       
-      sh.p("\n\nprefix(ad):\n");
+      sh.p("\n\nprefix(add):\n");
       
-      ArrayList<String> prefixWords2 = trie.searchPrefix("ad");
+      ArrayList<String> prefixWords2 = trie.searchPrefix("add");
       for (String word : prefixWords2) {
       
          sh.p(word);

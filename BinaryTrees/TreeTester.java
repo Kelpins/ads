@@ -17,6 +17,8 @@ public class TreeTester
       rbt.add(284);
       
       rbt.printPreOrder();
+      System.out.println("");
+      rbt.printLevelOrder();
       
       BinaryTreeVisualizer.visualizeBinaryTree(rbt);
    }

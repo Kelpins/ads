@@ -1,4 +1,5 @@
 import sh.*;
+import java.util.*;
 
 /**
    A binary search tree, which is defined by this:
@@ -96,6 +97,22 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T>
       
       }
 
+   }
+   
+   public void printLevelOrder() {
+   
+      Queue<BinaryNode<T>> q = new LinkedList<>();
+      q.add(this.root);
+      
+      while (!q.isEmpty()) {
+                  
+         if (q.element().getLeft() != null) q.add(q.element().getLeft());
+         if (q.element().getRight() != null) q.add(q.element().getRight());
+         System.out.print(q.element() + " ");
+         q.poll();
+      
+      }
+      
    }
    
    public void printHelper(BinaryNode<T> rt) {

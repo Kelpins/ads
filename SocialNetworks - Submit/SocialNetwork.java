@@ -7,8 +7,14 @@ import java.util.*;
 */
 public class SocialNetwork {
    
+   /*
+   * To switch to directional, input "directional_social_network.txt" into the FILE_NAME 
+   * and change the DIRECTIONAL class variable to true.
+   */
    /** Name of file containing the social network */
    private static final String FILE_NAME = "large_social_network.txt";
+   /** Whether or not the social network is directional */
+   private static final boolean DIRECTIONAL = false;
    
    /**
    * Creates a UI for users to interact with a social network, read only
@@ -29,11 +35,6 @@ public class SocialNetwork {
       */
       if (names == null) return;
       
-      //Declaring variables :D
-      String name;
-      ArrayList<GraphNode<String>> friends;
-      ArrayList<GraphNode<String>> friendsOfFriends;
-      
       //Defining variables :D
       boolean keepSearching = true;
       Scanner input = new Scanner(System.in);
@@ -42,19 +43,19 @@ public class SocialNetwork {
       while (keepSearching) {
          
          //Prompts the user to input a name
-         name = userInput(input, names);
+         String name = userInput(input, names);
          
          /*
          * Again, I apologize for the one-line if statement (still looks better, though)
          * This catches the weird scenario where a user inputs a name that doesn't exist,
          * then asks the program to end. Normally, the userInput function repeats until the
          * user submits a valid name, but if they never do, then the program needs to stop here.
-         */         
+         */     
          if (name == null) return;
          
          // Get the friends and the friends of friends
-         friends = getFriends(names.get(name));
-         friendsOfFriends = getFriendsOfFriends(names.get(name));
+         ArrayList<GraphNode<String>> friends = getFriends(names.get(name));
+         ArrayList<GraphNode<String>> friendsOfFriends = getFriendsOfFriends(names.get(name));
          
          // Print the friends and friends of friends
          printFriends(friends, friendsOfFriends);
@@ -118,7 +119,10 @@ public class SocialNetwork {
                String friend2 = scan.next();
                
                connections.get(friend1).addConnection(connections.get(friend2));
-               connections.get(friend2).addConnection(connections.get(friend1));
+               
+               //Sorry for the one-line if statement
+               if (!DIRECTIONAL) connections.get(friend2).addConnection(connections.get(friend1));
+               
                friend1 = null;
             
             }
@@ -182,6 +186,8 @@ public class SocialNetwork {
    
       System.out.print("Do you want to search again? ");
       String cont = in.nextLine();
+      //Apologies for the one-line if-statement; if they don't put anything then still end program
+      if (cont.equals("")) return false;
       if (cont.charAt(0) == 'Y' || cont.charAt(0) == 'y') {
       
          return true;
@@ -202,7 +208,7 @@ public class SocialNetwork {
       
       if (friends.size() == 0) {
       
-         System.out.println("No Friends");
+         System.out.println("No friends");
       
       }
       else {
@@ -217,7 +223,7 @@ public class SocialNetwork {
          else {
          
             System.out.println(
-               "Friends of Friends (" + friendsOfFriends.size() + "): " + friendsOfFriends
+               "Friends of friends (" + friendsOfFriends.size() + "): " + friendsOfFriends
             );
          
          }
@@ -244,6 +250,13 @@ public class SocialNetwork {
    */
    private static ArrayList<GraphNode<String>> getFriendsOfFriends(GraphNode<String> startNode) {
       
+      /*
+      * This would technically be better as a HashSet (would reduce Big O significantly)
+      * But alas it was not in the cards for me (lol my procedural decomposition requires
+      * that I pass ArrayLists through a bunch of different places, and it is far more work than
+      * it is worth to change every instance of "friends of friends" to a HashSet while leaving
+      * every instance of "friends" as an ArrayList).
+      */
       ArrayList<GraphNode<String>> allFriendsOfFriends = new ArrayList<>();
       
       //Start by getting a list of all friends of the individual

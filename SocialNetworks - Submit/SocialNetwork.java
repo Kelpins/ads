@@ -69,7 +69,7 @@ public class SocialNetwork {
    /**
    * Reads the first line of the given file, generating an AdjacencyList with no connections
    * Then uses every following line to draw connections between each person
-   * @param fileName the name of the file to read from
+   * @param fileName - the name of the file to read from
    * @return an AdjacencyList (a HashMap of Strings to their associated GraphNodes)
    *         containing each person and each connection.
    *         Returns null if file is invalid or absent.

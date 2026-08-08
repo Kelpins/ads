@@ -20,7 +20,7 @@ public class AddOneNNTester
       
       }
       
-      neuralNet.train(training, 20);
+      neuralNet.train(training, 200);
       System.out.println(neuralNet.test(testing));
       
         /*
